@@ -12,7 +12,11 @@ public class CityServiceImpl implements CityService {
     @Autowired
     CityRepository cityRepository;
 
-    public City findCityByNameAndCountry(String name, String country) {
+    public City findById(Long id){
+        return cityRepository.findById(id).orElse(null);
+    }
+
+    public City findByNameAndCountry(String name, String country) {
         return cityRepository.findCityByNameAndCountry(name, country);
     }
 

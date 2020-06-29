@@ -4,11 +4,10 @@ import htec.task.exception.CityAlreadyExistsException;
 import htec.task.mapper.CityMapper;
 import htec.task.model.City;
 import htec.task.service.CityService;
-import htec.task.web.dto.CityPostDTO;
+import htec.task.web.dto.city.CityPostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +27,7 @@ public class CityController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<City> createCity(@Valid @RequestBody CityPostDTO cityDTO){
-        City databaseCity = cityService.findCityByNameAndCountry(cityDTO.getName(), cityDTO.getCountry());
+        City databaseCity = cityService.findByNameAndCountry(cityDTO.getName(), cityDTO.getCountry());
         if(databaseCity != null){
             throw new CityAlreadyExistsException("City with given name and country already exists");
         }

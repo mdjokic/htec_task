@@ -1,4 +1,4 @@
-package htec.task.web.dto;
+package htec.task.web.dto.city;
 
 import lombok.Getter;
 import lombok.Setter;

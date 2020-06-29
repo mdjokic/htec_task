@@ -1,7 +1,7 @@
 package htec.task.mapper;
 
 import htec.task.model.City;
-import htec.task.web.dto.CityPostDTO;
+import htec.task.web.dto.city.CityPostDTO;
 import org.springframework.stereotype.Component;
 
 @Component

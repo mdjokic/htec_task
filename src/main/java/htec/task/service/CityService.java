@@ -4,7 +4,9 @@ import htec.task.model.City;
 
 public interface CityService {
 
-    City findCityByNameAndCountry(String name, String country);
+    City findById(Long id);
+
+    City findByNameAndCountry(String name, String country);
 
     City save(City city);
 
