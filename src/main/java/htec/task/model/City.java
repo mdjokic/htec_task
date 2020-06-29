@@ -28,4 +28,11 @@ public class City {
 
     public City() { }
 
+    public City(String name, String country, String description){
+        this.id = null;
+        this.name = name;
+        this.country = country;
+        this.description = description;
+    }
+
 }
