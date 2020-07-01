@@ -1,6 +1,7 @@
-package htec.task.mapper;
+package htec.task.mapper.comment;
 
 import htec.task.model.Comment;
+import htec.task.repository.dao.CityWithCommentProjection;
 import htec.task.web.dto.comment.CommentGetDTO;
 import htec.task.web.dto.comment.CommentPostDTO;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,15 @@ public class CommentMapper {
         commentDTO.setContent(comment.getContent());
         commentDTO.setModifiedAt(LocalDateTime.ofInstant(comment.getModifiedAt(), ZoneOffset.systemDefault()));
         commentDTO.setCityId(comment.getCity().getId());
+        return commentDTO;
+    }
+
+    public CommentGetDTO toDTO(CityWithCommentProjection projection){
+        CommentGetDTO commentDTO = new CommentGetDTO();
+        commentDTO.setId(projection.getCommentId());
+        commentDTO.setContent(projection.getCommentContent());
+        commentDTO.setModifiedAt(LocalDateTime.ofInstant(projection.getModifiedAt(), ZoneOffset.systemDefault()));
+        commentDTO.setCityId(projection.getId());
         return commentDTO;
     }
 
