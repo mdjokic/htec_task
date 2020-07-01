@@ -42,4 +42,8 @@ public class City {
         this.description = description;
     }
 
+    public String getNameAndCountry(){
+        return this.name.concat(" ").concat(this.country);
+    }
+
 }

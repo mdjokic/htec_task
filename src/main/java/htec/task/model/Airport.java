@@ -36,13 +36,13 @@ public class Airport {
     private String ICAOCode;
 
     @Column(name = "latitude")
-    private float latitude;
+    private double latitude;
 
     @Column(name = "longitude")
-    private float longitude;
+    private double longitude;
 
     @Column(name = "altitude")
-    private float altitude;
+    private double altitude;
 
     @Column(name = "timezone")
     private ZoneOffset timezone;
