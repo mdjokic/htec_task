@@ -2,7 +2,7 @@ package htec.task.web.controller;
 
 import htec.task.exception.CityDoesntExistsException;
 import htec.task.exception.CommentDoesntExistsException;
-import htec.task.mapper.CommentMapper;
+import htec.task.mapper.comment.CommentDTOMapper;
 import htec.task.model.City;
 import htec.task.model.Comment;
 import htec.task.service.CityService;
@@ -25,7 +25,7 @@ public class CommentController {
     private CommentService commentService;
 
     @Autowired
-    private CommentMapper commentMapper;
+    private CommentDTOMapper commentDTOMapper;
 
     @Autowired
     private CityService cityService;
@@ -36,10 +36,10 @@ public class CommentController {
         if(databaseCity == null){
             throw new CityDoesntExistsException("City with given id doesn't exists");
         }
-        Comment newComment = commentMapper.toEntity(commentDTO);
+        Comment newComment = commentDTOMapper.toEntity(commentDTO);
         newComment.setCity(databaseCity);
         newComment = commentService.save(newComment);
-        CommentGetDTO commentGetDTO = commentMapper.toDTO(newComment);
+        CommentGetDTO commentGetDTO = commentDTOMapper.toDTO(newComment);
         return new ResponseEntity<>(commentGetDTO, HttpStatus.CREATED);
     }
 
@@ -52,7 +52,7 @@ public class CommentController {
         }
         databaseComment.update(commentDTO.getContent());
         databaseComment = commentService.save(databaseComment);
-        CommentGetDTO commentGetDTO = commentMapper.toDTO(databaseComment);
+        CommentGetDTO commentGetDTO = commentDTOMapper.toDTO(databaseComment);
         return new ResponseEntity<>(commentGetDTO, HttpStatus.OK);
     }
 

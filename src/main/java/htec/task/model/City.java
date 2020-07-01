@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +28,12 @@ public class City {
     @Column(name = "description", nullable = false)
     private String description;
 
-    public City() { }
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
+    public City() {
+        comments = new ArrayList<>();
+    }
 
     public City(String name, String country, String description){
         this.id = null;

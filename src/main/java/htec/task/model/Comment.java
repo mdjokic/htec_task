@@ -26,7 +26,7 @@ public class Comment {
     @Column(name = "modified_at")
     private Instant modifiedAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 
@@ -38,6 +38,11 @@ public class Comment {
     public Comment(String content){
         this.content = content;
         this.createdAt = Instant.now();
+        this.modifiedAt = Instant.now();
+    }
+
+    public void update(String content){
+        this.content = content;
         this.modifiedAt = Instant.now();
     }
 }
