@@ -6,6 +6,7 @@ import htec.task.model.City;
 import htec.task.repository.AirportRepository;
 import htec.task.repository.CityRepository;
 import htec.task.service.AirportService;
+import htec.task.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,15 +24,14 @@ public class AirportServiceImpl implements AirportService {
     private AirportRepository airportRepository;
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityService cityService;
 
     @Autowired
     private AirportFileMapper airportFileMapper;
 
     public void createAirports(MultipartFile file){
-        List<City> cities = cityRepository.findAll();
         List<Airport> newAirports = new ArrayList<>();
-        Map<String, City> citiesMap = cities.stream().collect(Collectors.toMap(City::getNameAndCountry, city -> city));
+        Map<String, City> citiesMap = cityService.createCitiesNameAndCountryKeyMap();
         City city;
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))){
             String line = reader.readLine();
@@ -49,5 +49,23 @@ public class AirportServiceImpl implements AirportService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Airport> findAll(){
+        return airportRepository.findAll();
+    }
+
+    public Map<Long, Airport> createAirportsIdKeyMap(List<Airport> airports){
+        return airports.stream().collect(Collectors.toMap(Airport::getId, airport -> airport));
+    }
+
+    public Map<String, Airport> createAirportsIATAKeyMap(List<Airport> airports){
+        return airports.stream().filter(airport -> airport.getIATACode() != null).
+                collect(Collectors.toMap(Airport::getIATACode, airport -> airport));
+    }
+
+    public Map<String, Airport> createAirportsICAOKeyMap(List<Airport> airports){
+        return airports.stream().filter(airport -> airport.getICAOCode() != null).
+                collect(Collectors.toMap(Airport::getICAOCode, airport -> airport));
     }
 }

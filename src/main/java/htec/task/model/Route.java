@@ -22,17 +22,13 @@ public class Route {
     @Column(name = "airline")
     private String airline;
 
-    @Column(name = "source_airport_id", nullable = false)
-    private Long sourceAirportId;
+    @ManyToOne
+    @JoinColumn(name = "source_airport_id")
+    private Airport sourceAirport;
 
-    @Column(name = "source_airport")
-    private String sourceAirport;
-
-    @Column(name = "destination_airport_id", nullable = false)
-    private Long destinationAirportId;
-
-    @Column(name = "destination_airport")
-    private String destinationAirport;
+    @ManyToOne
+    @JoinColumn(name = "destination_airport_id")
+    private Airport destinationAirport;
 
     @Column(name = "codeshare")
     private char codeshare;

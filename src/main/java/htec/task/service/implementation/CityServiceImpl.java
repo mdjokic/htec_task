@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -43,5 +45,10 @@ public class CityServiceImpl implements CityService {
 
     public City save(City city){
         return cityRepository.save(city);
+    }
+
+    public Map<String, City> createCitiesNameAndCountryKeyMap(){
+        List<City> cities = cityRepository.findAll();
+        return cities.stream().collect(Collectors.toMap(City::getNameAndCountry, city -> city));
     }
 }

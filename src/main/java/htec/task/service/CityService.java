@@ -2,6 +2,7 @@ package htec.task.service;
 
 import htec.task.model.City;
 import java.util.List;
+import java.util.Map;
 
 public interface CityService {
 
@@ -16,5 +17,7 @@ public interface CityService {
     City findByNameAndCountry(String name, String country);
 
     City save(City city);
+
+    Map<String, City> createCitiesNameAndCountryKeyMap();
 
 }
