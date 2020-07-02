@@ -14,8 +14,6 @@ import java.util.TimeZone;
 public class Airport {
 
     @Id
-    @GeneratedValue(generator = "airport_seq_gen")
-    @SequenceGenerator(name = "airport_seq_gen", sequenceName = "airport_seq_gen", initialValue = 1)
     @Column(name = "id")
     private Long id;
 
@@ -36,13 +34,13 @@ public class Airport {
     private String ICAOCode;
 
     @Column(name = "latitude")
-    private double latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
-    private double longitude;
+    private Double longitude;
 
     @Column(name = "altitude")
-    private double altitude;
+    private Double altitude;
 
     @Column(name = "timezone")
     private ZoneOffset timezone;

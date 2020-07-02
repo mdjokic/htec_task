@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -40,7 +41,7 @@ public class Route {
     private String equipment;
 
     @Column(name = "price", nullable = false)
-    private double price;
+    private BigDecimal price;
 
     public Route(){ }
 
