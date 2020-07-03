@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class CommentPostDTO {
 
     @NotNull(message = "CityId can't be null")
-    private long cityId;
+    private Long cityId;
 
     @NotBlank(message = "Comment can't be empty")
     private String content;
