@@ -1,5 +1,6 @@
 package htec.task.configuration;
 
+import htec.task.model.enums.Role;
 import htec.task.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,13 +43,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
+                csrf().disable().
                 sessionManagement().
                 sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 authorizeRequests().
+                antMatchers(HttpMethod.POST, "/api/v1/cities").hasRole("ADMIN").
+                antMatchers(HttpMethod.POST, "/api/v1/routes").hasRole("ADMIN").
+                antMatchers(HttpMethod.POST, "/api/v1/airports").hasRole("ADMIN").
+                antMatchers(HttpMethod.GET, "/api/v1/cities").hasRole("USER").
+                antMatchers(HttpMethod.POST, "/api/v1/comments").hasRole("USER").
+                antMatchers(HttpMethod.PUT, "/api/v1/comments").hasRole("USER").
+                antMatchers(HttpMethod.DELETE, "/api/v1/comments").hasRole("USER").
+                antMatchers(HttpMethod.GET, "/api/v1/routes").hasRole("USER").
                 antMatchers("/api/v1/auth").permitAll().
-                antMatchers(HttpMethod.POST, "/api/v1/users").permitAll().
-                anyRequest().authenticated()
-                .and().cors();
+                antMatchers("/api/v1/users").permitAll().
+                anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
