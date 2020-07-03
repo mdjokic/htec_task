@@ -30,6 +30,10 @@ public class Comment {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comment(){
         this.createdAt = Instant.now();
         this.modifiedAt = Instant.now();
