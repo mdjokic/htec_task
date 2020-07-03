@@ -3,6 +3,7 @@ package htec.task.web.advice;
 import htec.task.exception.CityAlreadyExistsException;
 import htec.task.exception.CityDoesntExistsException;
 import htec.task.exception.CommentDoesntExistsException;
+import htec.task.exception.UsernameAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -60,6 +61,15 @@ public class ErrorHandlingAdvice {
     ValidationErrorResponse onCommentDoesntExistsException(CommentDoesntExistsException e) {
         ValidationErrorResponse error = new ValidationErrorResponse();
         error.getViolations().add(new Violation("CommentId", e.getMessage()));
+        return error;
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    ValidationErrorResponse onUsernameAlreadyExistsException(UsernameAlreadyExistsException e) {
+        ValidationErrorResponse error = new ValidationErrorResponse();
+        error.getViolations().add(new Violation("Username", "Username already taken. "));
         return error;
     }
 
