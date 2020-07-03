@@ -15,13 +15,13 @@ import java.util.Map;
 @Component
 public class TokenUtils {
 
-    @Value("X-Auth-Token")
+    @Value("${jwt.property-name}")
     public String AUTH_TOKEN_PROPERTY_NAME;
 
-    @Value("myXAuthSecret")
+    @Value("${jwt.secret}")
     private String SECRET;
 
-    @Value("1800000")
+    @Value("${jwt.expiration-time}")
     private Long EXPIRATION_TIME;
 
     private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
