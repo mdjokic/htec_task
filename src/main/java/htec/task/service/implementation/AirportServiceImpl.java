@@ -54,6 +54,10 @@ public class AirportServiceImpl implements AirportService {
         return airportRepository.findAll();
     }
 
+    public List<Airport> findByCity(City city){
+        return airportRepository.findAirportByCity(city);
+    }
+
     public Map<Long, Airport> createAirportsIdKeyMap(List<Airport> airports){
         return airports.stream().collect(Collectors.toMap(Airport::getId, airport -> airport));
     }

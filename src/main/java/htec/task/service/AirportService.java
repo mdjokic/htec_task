@@ -1,6 +1,7 @@
 package htec.task.service;
 
 import htec.task.model.Airport;
+import htec.task.model.City;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface AirportService {
     void createAirports(MultipartFile file);
 
     List<Airport> findAll();
+
+    public List<Airport> findByCity(City city);
 
     Map<Long, Airport> createAirportsIdKeyMap(List<Airport> airports);
 
